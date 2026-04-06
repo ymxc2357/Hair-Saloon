@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery | Glamour Studio</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="logo">✂ Glamour Studio</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="appointments.html">Book Appointment</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <h1>Our Gallery</h1>
+    <p>A glimpse of the transformations we create</p>
+  </section>
+
+  <!-- GALLERY GRID -->
+  <section class="gallery-section">
+
+    <div class="gallery-filter">
+      <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+      <button class="filter-btn" onclick="filterGallery('haircut')">Hair Cuts</button>
+      <button class="filter-btn" onclick="filterGallery('colour')">Hair Colour</button>
+      <button class="filter-btn" onclick="filterGallery('styling')">Styling</button>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+
+      <div class="gallery-item" data-category="haircut">
+        <div class="gallery-placeholder">💇‍♀️</div>
+        <div class="gallery-overlay">
+          <p>Women's Haircut</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="colour">
+        <div class="gallery-placeholder">🎨</div>
+        <div class="gallery-overlay">
+          <p>Balayage</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="styling">
+        <div class="gallery-placeholder">✨</div>
+        <div class="gallery-overlay">
+          <p>Bridal Updo</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="haircut">
+        <div class="gallery-placeholder">✂️</div>
+        <div class="gallery-overlay">
+          <p>Men's Haircut</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="colour">
+        <div class="gallery-placeholder">🌈</div>
+        <div class="gallery-overlay">
+          <p>Highlights</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="styling">
+        <div class="gallery-placeholder">💫</div>
+        <div class="gallery-overlay">
+          <p>Blow Dry</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="colour">
+        <div class="gallery-placeholder">🎭</div>
+        <div class="gallery-overlay">
+          <p>Global Colour</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="styling">
+        <div class="gallery-placeholder">👑</div>
+        <div class="gallery-overlay">
+          <p>Hair Straightening</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="haircut">
+        <div class="gallery-placeholder">🌸</div>
+        <div class="gallery-overlay">
+          <p>Kids Haircut</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Love What You See?</h2>
+    <p>Book your own transformation today.</p>
+    <a href="appointments.html" class="btn">Book Now</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Glamour Studio. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Appointment | Glamour Studio</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="logo">✂ Glamour Studio</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="appointments.html">Book Appointment</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <h1>Book an Appointment</h1>
+    <p>Fill in the form below and we'll confirm your slot shortly</p>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section class="booking-section">
+    <div class="booking-card">
+
+      <div id="success-message" class="success-message" style="display:none;">
+        🎉 Thank you! Your appointment request has been received.
+        We will confirm your slot shortly.
+      </div>
+
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number" />
+      </div>
+
+      <div class="form-group">
+        <label for="service">Select Service</label>
+        <select id="service">
+          <option value="">-- Choose a Service --</option>
+          <optgroup label="Hair Cuts">
+            <option>Women's Haircut</option>
+            <option>Men's Haircut</option>
+            <option>Kids Haircut</option>
+          </optgroup>
+          <optgroup label="Hair Colour">
+            <option>Global Colour</option>
+            <option>Highlights</option>
+            <option>Balayage</option>
+          </optgroup>
+          <optgroup label="Treatments">
+            <option>Keratin Treatment</option>
+            <option>Hair Spa</option>
+            <option>Deep Conditioning</option>
+          </optgroup>
+          <optgroup label="Styling">
+            <option>Blow Dry</option>
+            <option>Hair Straightening</option>
+            <option>Bridal Updo</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date" />
+        </div>
+        <div class="form-group">
+          <label for="time">Preferred Time</label>
+          <select id="time">
+            <option value="">-- Select Time --</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>01:00 PM</option>
+            <option>02:00 PM</option>
+            <option>03:00 PM</option>
+            <option>04:00 PM</option>
+            <option>05:00 PM</option>
+            <option>06:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Additional Notes (optional)</label>
+        <textarea id="notes" rows="3" placeholder="Any special requests?"></textarea>
+      </div>
+
+      <button class="btn btn-full" id="submit-btn" onclick="submitBooking()">
+        Confirm Appointment
+      </button>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Glamour Studio. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

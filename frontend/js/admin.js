@@ -2,7 +2,7 @@
    TK'S MAKEOVER — admin.js
    ══════════════════════════════════ */
 
-const BACKEND = 'http://localhost:5000';
+const BACKEND = 'https://tks-makeover-backend.onrender.com';
 const ADMIN_PASSWORD = 'tks2025admin'; // Change this to your own password!
 
 let allAppointments = [];

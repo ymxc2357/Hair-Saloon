@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | Tk's Makeover</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-screen" id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">✂ Tk's <span>Makeover</span></div>
+      <h2>Admin Login</h2>
+      <p>Enter your password to access the dashboard</p>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="admin-password" placeholder="Enter admin password"
+          onkeydown="if(event.key==='Enter') adminLogin()" />
+      </div>
+
+      <button class="btn btn-full" onclick="adminLogin()">Login →</button>
+      <p class="login-error" id="login-error"></p>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard" style="display:none;">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">✂ Tk's <span>Makeover</span></div>
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active" onclick="showTab('appointments')">
+          📋 Appointments
+        </a>
+        <a href="#" class="sidebar-link" onclick="showTab('services')">
+          💰 Edit Services
+        </a>
+      </nav>
+      <button class="sidebar-logout" onclick="adminLogout()">🚪 Logout</button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dash-main">
+
+      <!-- HEADER -->
+      <div class="dash-header">
+        <div>
+          <h1 id="tab-title">Appointments</h1>
+          <p id="tab-subtitle">Manage all customer bookings</p>
+        </div>
+        <button class="btn" onclick="loadAppointments()" id="refresh-btn">↻ Refresh</button>
+      </div>
+
+      <!-- STATS ROW -->
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <span class="stat-card-number" id="stat-total">—</span>
+          <span class="stat-card-label">Total Bookings</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card-number" id="stat-pending">—</span>
+          <span class="stat-card-label">Pending</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card-number" id="stat-approved">—</span>
+          <span class="stat-card-label">Approved</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card-number" id="stat-rejected">—</span>
+          <span class="stat-card-label">Rejected</span>
+        </div>
+      </div>
+
+      <!-- APPOINTMENTS TAB -->
+      <div id="tab-appointments">
+        <div class="filter-row">
+          <button class="filter-btn active" onclick="filterByStatus('all', this)">All</button>
+          <button class="filter-btn" onclick="filterByStatus('pending', this)">Pending</button>
+          <button class="filter-btn" onclick="filterByStatus('approved', this)">Approved</button>
+          <button class="filter-btn" onclick="filterByStatus('rejected', this)">Rejected</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Notes</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="appointments-tbody">
+              <tr><td colspan="8" class="table-loading">Loading appointments...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SERVICES TAB -->
+      <div id="tab-services" style="display:none;">
+        <div class="services-editor">
+          <p class="services-note">✏️ Edit service prices below and click Save to update.</p>
+
+          <div class="service-editor-group">
+            <h3>💇‍♀️ Hair Cuts</h3>
+            <div class="service-editor-item">
+              <span>Women's Haircut</span>
+              <input type="number" value="499" id="price-womens-haircut" />
+            </div>
+            <div class="service-editor-item">
+              <span>Men's Haircut</span>
+              <input type="number" value="199" id="price-mens-haircut" />
+            </div>
+            <div class="service-editor-item">
+              <span>Kids Haircut</span>
+              <input type="number" value="149" id="price-kids-haircut" />
+            </div>
+          </div>
+
+          <div class="service-editor-group">
+            <h3>🎨 Hair Colour</h3>
+            <div class="service-editor-item">
+              <span>Global Colour</span>
+              <input type="number" value="1499" id="price-global-colour" />
+            </div>
+            <div class="service-editor-item">
+              <span>Highlights</span>
+              <input type="number" value="1999" id="price-highlights" />
+            </div>
+            <div class="service-editor-item">
+              <span>Balayage</span>
+              <input type="number" value="2999" id="price-balayage" />
+            </div>
+          </div>
+
+          <div class="service-editor-group">
+            <h3>✨ Treatments</h3>
+            <div class="service-editor-item">
+              <span>Keratin Treatment</span>
+              <input type="number" value="3499" id="price-keratin" />
+            </div>
+            <div class="service-editor-item">
+              <span>Hair Spa</span>
+              <input type="number" value="799" id="price-hair-spa" />
+            </div>
+            <div class="service-editor-item">
+              <span>Deep Conditioning</span>
+              <input type="number" value="599" id="price-deep-conditioning" />
+            </div>
+          </div>
+
+          <div class="service-editor-group">
+            <h3>💅 Styling</h3>
+            <div class="service-editor-item">
+              <span>Blow Dry</span>
+              <input type="number" value="349" id="price-blow-dry" />
+            </div>
+            <div class="service-editor-item">
+              <span>Hair Straightening</span>
+              <input type="number" value="399" id="price-straightening" />
+            </div>
+            <div class="service-editor-item">
+              <span>Bridal Updo</span>
+              <input type="number" value="2499" id="price-bridal-updo" />
+            </div>
+          </div>
+
+          <button class="btn" onclick="saveServices()" style="margin-top:24px;">
+            💾 Save All Prices
+          </button>
+          <p class="save-msg" id="save-msg"></p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -3,58 +3,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Glamour Studio | Hair Salon</title>
+  <title>Tk's Makeover | Premium Hair Salon</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav class="navbar">
-    <div class="logo">✂ Glamour Studio</div>
-    <ul class="nav-links">
+  <!-- NAVBAR -->
+<!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">Tk's <span>Makeover</span></div>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
-      <li><a href="appointments.html">Book Appointment</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="appointments.html" class="nav-cta">Book Now</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
     <div class="hero-content">
-      <h1>Look Good. Feel Great.</h1>
-      <p>Premium hair care services tailored just for you.</p>
-      <a href="appointments.html" class="btn">Book an Appointment</a>
+      <div class="hero-badge">✦ Premium Hair Studio</div>
+      <h1>Your Hair.<br/><span class="highlight">Our Passion.</span></h1>
+      <p>Step into Tk's Makeover — where bold transformations and expert styling meet in perfect harmony.</p>
+      <div class="hero-buttons">
+        <a href="appointments.html" class="btn">Book Appointment</a>
+        <a href="services.html" class="btn btn-outline">View Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Happy Clients</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">8+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Services</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- WHY CHOOSE US -->
   <section class="features">
-    <h2>Why Choose Us?</h2>
+    <span class="section-label">Why Us</span>
+    <h2 class="section-title">More Than Just a <span>Haircut</span></h2>
     <div class="features-grid">
-      <div class="feature-card">
-        <span>💇‍♀️</span>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">💇‍♀️</span>
         <h3>Expert Stylists</h3>
-        <p>Our team brings years of experience and passion to every cut.</p>
+        <p>Years of professional experience and a passion for perfection in every single cut and style.</p>
       </div>
-      <div class="feature-card">
-        <span>🌿</span>
-        <h3>Natural Products</h3>
-        <p>We use only premium, skin-friendly hair care products.</p>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">🌿</span>
+        <h3>Premium Products</h3>
+        <p>Only the finest, skin-friendly, salon-grade products touch your hair at Tk's Makeover.</p>
       </div>
-      <div class="feature-card">
-        <span>📅</span>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">📅</span>
         <h3>Easy Booking</h3>
-        <p>Book your appointment online in under a minute.</p>
+        <p>Book your slot online in under a minute — no calls, no waiting, no hassle.</p>
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Ready for Your <span style="color:var(--primary)">Transformation?</span></h2>
+    <p>Book your appointment today and let us handle the rest.</p>
+    <a href="appointments.html" class="btn">Book Now →</a>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 Glamour Studio. All rights reserved.</p>
+    <p>© 2025 Tk's Makeover. Crafted with ❤️ for bold looks.</p>
   </footer>
 
+  <script src="js/main.js"></script>
 </body>
 </html>
+
+<!-- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6bmlrd2l0Z2JpcnZnZXdveHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NjQ1NTksImV4cCI6MjA5MTI0MDU1OX0.LOUMZXCjmUO-b7D5Sv6ytp2MOJXRFxkAuHVqH7g2wpw -->
+ <!-- https://supabase.com/dashboard/project/jznikwitgbirvgewoxwq -->

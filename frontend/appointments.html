@@ -9,15 +9,21 @@
 <body>
 
   <!-- NAVIGATION -->
-  <nav class="navbar">
-    <div class="logo">✂ Glamour Studio</div>
-    <ul class="nav-links">
+<!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">Tk's <span>Makeover</span></div>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
-      <li><a href="appointments.html">Book Appointment</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="appointments.html" class="nav-cta">Book Now</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
 
   <!-- PAGE HEADER -->
@@ -107,8 +113,8 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Glamour Studio. All rights reserved.</p>
+<footer class="footer">
+    <p>© 2025 Tk's Makeover. Crafted with ❤️ for bold looks.</p>
   </footer>
 
   <script src="js/main.js"></script>

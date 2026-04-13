@@ -1,125 +1,378 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Services | Glamour Studio</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | Tk's Makeover - The Noir Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-primary-fixed-variant": "#920027",
+          "on-surface": "#e5e2e1",
+          "secondary-container": "#fecb00",
+          "surface-dim": "#131313",
+          "primary-container": "#ff5167",
+          "on-primary": "#680019",
+          "primary-fixed-dim": "#ffb3b5",
+          "primary": "#ffb3b5",
+          "tertiary": "#c6c6c7",
+          "surface-container-high": "#2a2a2a",
+          "surface-container-highest": "#353534",
+          "surface-container-low": "#1c1b1b",
+          "surface": "#131313",
+          "surface-container": "#201f1f",
+          "background": "#131313",
+          "outline-variant": "#5d3f40",
+          "on-primary-container": "#5b0015",
+        },
+        fontFamily: { "headline": ["Noto Serif"], "body": ["Inter"], "label": ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; display:inline-block; line-height:1; vertical-align:middle; }
+  details > summary::-webkit-details-marker { display:none; }
+  #mobile-menu { display:none; }
+  #mobile-menu.open { display:flex; }
+  @keyframes pulse-red {
+    0%   { transform:scale(1);    box-shadow:0 0 0 0    rgba(255,81,103,.5); }
+    70%  { transform:scale(1.05); box-shadow:0 0 0 14px rgba(255,81,103,0); }
+    100% { transform:scale(1);    box-shadow:0 0 0 0    rgba(255,81,103,0); }
+  }
+  .animate-pulse-red { animation:pulse-red 2s infinite; }
+  .fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+</style>
 </head>
-<body>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
 
-  <!-- NAVIGATION -->
 <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
-    <div class="logo">Tk's <span>Makeover</span></div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="appointments.html" class="nav-cta">Book Now</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<header class="fixed top-0 w-full z-50 bg-neutral-900/60 backdrop-blur-xl shadow-2xl shadow-black/20">
+  <nav class="flex justify-between items-center px-6 md:px-8 py-4">
+    <a href="index.html" class="text-xl md:text-2xl font-serif tracking-tighter text-neutral-100">Tk's Makeover</a>
+    <div class="hidden md:flex items-center gap-8 lg:gap-10">
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="index.html">Home</a>
+      <a class="text-red-400 font-medium border-b border-red-400 pb-0.5 text-xs uppercase tracking-widest" href="services.html">Services</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="gallery.html">Gallery</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="partners.html">Partners</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="contact.html">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="appointments.html" class="bg-primary-container text-on-primary-container px-4 py-2 text-xs font-bold uppercase tracking-widest hover:opacity-80 active:scale-95 transition-all">Book Now</a>
+      <button class="md:hidden flex flex-col justify-center gap-[5px] p-1" onclick="toggleMenu()">
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl1"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl2"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl3"></span>
+      </button>
+    </div>
   </nav>
+  <div id="mobile-menu" class="flex-col items-center gap-5 py-8 bg-neutral-950/98 backdrop-blur-xl border-t border-white/5 text-center">
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="index.html" onclick="toggleMenu()">Home</a>
+    <a class="text-red-400 text-sm uppercase tracking-widest font-medium" href="services.html" onclick="toggleMenu()">Services</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="gallery.html" onclick="toggleMenu()">Gallery</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="partners.html" onclick="toggleMenu()">Partners</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="appointments.html" onclick="toggleMenu()" class="mt-2 inline-block bg-primary-container text-on-primary-container px-10 py-3 text-xs font-bold uppercase tracking-widest">Book Now</a>
+  </div>
+</header>
+
+<main class="pt-28 pb-24">
 
   <!-- PAGE HEADER -->
-  <section class="page-header">
-    <h1>Our Services</h1>
-    <p>Quality treatments at honest prices</p>
+  <header class="px-6 md:px-8 mb-12 md:mb-24 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+      <div class="max-w-2xl fade-in">
+        <span class="font-label text-xs uppercase tracking-[0.4em] text-primary mb-4 block">The Noir Atelier</span>
+        <!-- MOBILE: smaller headline -->
+        <h1 class="font-headline text-5xl md:text-7xl lg:text-9xl tracking-tighter leading-none mb-6">
+          Our <br/><span class="italic text-primary">Services</span>
+        </h1>
+        <p class="font-body text-tertiary text-base md:text-lg max-w-md">
+          A curated selection of artisanal hair treatments and avant-garde styling, tailored for the modern connoisseur.
+        </p>
+      </div>
+      <!-- Salon image — hidden on mobile -->
+      <div class="relative hidden md:block w-72 h-96 overflow-hidden rounded-lg shadow-2xl group fade-in flex-shrink-0">
+        <img src="images/salon-interior.png" alt="Salon Interior" class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"/>
+        <div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICES ACCORDION -->
+  <section class="max-w-7xl mx-auto px-4 md:px-8 space-y-3">
+
+    <!-- 01 Hair Cuts -->
+    <details class="group bg-surface-container-low overflow-hidden rounded-lg" open>
+      <summary class="list-none cursor-pointer p-6 md:p-12 flex items-center justify-between hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3 md:gap-6">
+          <span class="font-headline text-2xl md:text-5xl text-on-surface opacity-30">01</span>
+          <h2 class="font-headline text-2xl md:text-5xl tracking-tight">Hair Cuts</h2>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4">
+          <span class="font-label text-[9px] tracking-[0.3em] uppercase opacity-50 group-open:hidden hidden sm:block">Explore</span>
+          <span class="material-symbols-outlined text-primary transition-transform duration-500 group-open:rotate-180">expand_more</span>
+        </div>
+      </summary>
+      <div class="px-6 md:px-12 pb-8 md:pb-12">
+        <!-- Mobile: stack vertically, Desktop: 2 cols -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+          <div class="space-y-0 w-full order-2 md:order-1">
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Women</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 md:group-hover/item:-translate-x-2 transition-transform">₹499</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Men</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 md:group-hover/item:-translate-x-2 transition-transform">₹199</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Kids</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 md:group-hover/item:-translate-x-2 transition-transform">₹149</span>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 md:order-2 h-48 md:h-64 overflow-hidden rounded">
+            <img src="images/men-haircut.png" alt="Men's Haircut" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"/>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 02 Hair Colour -->
+    <details class="group bg-surface-container-low overflow-hidden rounded-lg">
+      <summary class="list-none cursor-pointer p-6 md:p-12 flex items-center justify-between hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3 md:gap-6">
+          <span class="font-headline text-2xl md:text-5xl text-on-surface opacity-30">02</span>
+          <h2 class="font-headline text-2xl md:text-5xl tracking-tight">Hair Colour</h2>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4">
+          <span class="font-label text-[9px] tracking-[0.3em] uppercase opacity-50 group-open:hidden hidden sm:block">Explore</span>
+          <span class="material-symbols-outlined text-primary transition-transform duration-500 group-open:rotate-180">expand_more</span>
+        </div>
+      </summary>
+      <div class="px-6 md:px-12 pb-8 md:pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+          <div class="h-48 md:h-64 overflow-hidden rounded">
+            <img src="images/hair-colour.png" alt="Hair Colour" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"/>
+          </div>
+          <div class="space-y-0 w-full">
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Global</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹1499</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Highlights</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹1999</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Balayage</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹2999</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 03 Treatments -->
+    <details class="group bg-surface-container-low overflow-hidden rounded-lg">
+      <summary class="list-none cursor-pointer p-6 md:p-12 flex items-center justify-between hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3 md:gap-6">
+          <span class="font-headline text-2xl md:text-5xl text-on-surface opacity-30">03</span>
+          <h2 class="font-headline text-2xl md:text-5xl tracking-tight">Treatments</h2>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4">
+          <span class="font-label text-[9px] tracking-[0.3em] uppercase opacity-50 group-open:hidden hidden sm:block">Explore</span>
+          <span class="material-symbols-outlined text-primary transition-transform duration-500 group-open:rotate-180">expand_more</span>
+        </div>
+      </summary>
+      <div class="px-6 md:px-12 pb-8 md:pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+          <div class="space-y-0 w-full order-2 md:order-1">
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Keratin</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹3499</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Hair Spa</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹799</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Deep Conditioning</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹599</span>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 md:order-2 h-48 md:h-64 overflow-hidden rounded">
+            <img src="images/spa-treatment.png" alt="Spa Treatment" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"/>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 04 Styling -->
+    <details class="group bg-surface-container-low overflow-hidden rounded-lg">
+      <summary class="list-none cursor-pointer p-6 md:p-12 flex items-center justify-between hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3 md:gap-6">
+          <span class="font-headline text-2xl md:text-5xl text-on-surface opacity-30">04</span>
+          <h2 class="font-headline text-2xl md:text-5xl tracking-tight">Styling</h2>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4">
+          <span class="font-label text-[9px] tracking-[0.3em] uppercase opacity-50 group-open:hidden hidden sm:block">Explore</span>
+          <span class="material-symbols-outlined text-primary transition-transform duration-500 group-open:rotate-180">expand_more</span>
+        </div>
+      </summary>
+      <div class="px-6 md:px-12 pb-8 md:pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+          <div class="h-48 md:h-64 overflow-hidden rounded">
+            <img src="images/women-haircut.png" alt="Bridal Styling" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"/>
+          </div>
+          <div class="space-y-0 w-full">
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Blow Dry</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹349</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Straightening</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹399</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-4 md:py-6 group/item hover:bg-surface-container-high transition-all duration-300 px-3 md:px-4 -mx-3 md:-mx-4 rounded">
+              <span class="text-lg md:text-2xl font-light">Bridal Updo</span>
+              <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-px bg-outline-variant w-8 md:w-32 opacity-20"></div>
+                <span class="font-bold text-primary tracking-tighter text-xl md:text-2xl group-hover/item:-translate-x-1 transition-transform">₹2499</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
   </section>
 
-  <!-- SERVICES SECTION -->
-  <section class="services">
-
-    <div class="service-category">
-      <h2>💇‍♀️ Hair Cuts</h2>
-      <div class="service-list">
-        <div class="service-item">
-          <span>Women's Haircut</span>
-          <span>₹499</span>
-        </div>
-        <div class="service-item">
-          <span>Men's Haircut</span>
-          <span>₹199</span>
-        </div>
-        <div class="service-item">
-          <span>Kids Haircut</span>
-          <span>₹149</span>
-        </div>
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-6 md:px-8 mt-20 md:mt-40">
+    <div class="relative bg-surface-container-highest p-10 md:p-24 rounded-lg overflow-hidden text-center">
+      <div class="absolute inset-0 opacity-10">
+        <img src="images/bridal-styling.png" alt="bg" class="w-full h-full object-cover"/>
+      </div>
+      <div class="relative z-10">
+        <h2 class="font-headline text-3xl md:text-6xl mb-6 md:mb-8 tracking-tight">
+          Ready for your <br/><span class="italic text-primary">Signature Transformation?</span>
+        </h2>
+        <p class="text-tertiary mb-8 md:mb-12 max-w-xl mx-auto text-base md:text-lg">Book your appointment today and step into the world of curated beauty.</p>
+        <a href="appointments.html" class="inline-block bg-primary-container text-on-primary-container font-bold uppercase tracking-[0.2em] px-8 md:px-12 py-4 md:py-5 hover:bg-on-primary-fixed-variant transition-colors shadow-2xl text-sm">
+          Secure Your Session
+        </a>
       </div>
     </div>
-
-    <div class="service-category">
-      <h2>🎨 Hair Colour</h2>
-      <div class="service-list">
-        <div class="service-item">
-          <span>Global Colour</span>
-          <span>₹1,499</span>
-        </div>
-        <div class="service-item">
-          <span>Highlights</span>
-          <span>₹1,999</span>
-        </div>
-        <div class="service-item">
-          <span>Balayage</span>
-          <span>₹2,999</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-category">
-      <h2>✨ Treatments</h2>
-      <div class="service-list">
-        <div class="service-item">
-          <span>Keratin Treatment</span>
-          <span>₹3,499</span>
-        </div>
-        <div class="service-item">
-          <span>Hair Spa</span>
-          <span>₹799</span>
-        </div>
-        <div class="service-item">
-          <span>Deep Conditioning</span>
-          <span>₹599</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-category">
-      <h2>💅 Styling</h2>
-      <div class="service-list">
-        <div class="service-item">
-          <span>Blow Dry</span>
-          <span>₹349</span>
-        </div>
-        <div class="service-item">
-          <span>Hair Straightening</span>
-          <span>₹399</span>
-        </div>
-        <div class="service-item">
-          <span>Bridal Updo</span>
-          <span>₹2,499</span>
-        </div>
-      </div>
-    </div>
-
   </section>
 
-  <!-- CALL TO ACTION -->
-  <section class="cta">
-    <h2>Ready to Book?</h2>
-    <p>Choose your service and book an appointment in minutes.</p>
-    <a href="appointments.html" class="btn">Book Now</a>
-  </section>
+</main>
 
-  <!-- FOOTER -->
-<footer class="footer">
-    <p>© 2025 Tk's Makeover. Crafted with ❤️ for bold looks.</p>
-  </footer>
+<!-- FOOTER -->
+<footer class="bg-neutral-950 w-full py-12 px-6 md:px-8">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto border-t border-outline-variant/10 pt-12">
+    <div>
+      <div class="text-xl font-serif text-neutral-100 mb-4">Tk's Makeover</div>
+      <p class="text-neutral-500 text-sm leading-relaxed">Defining the future of luxury salon experiences through artistic precision and editorial style.</p>
+    </div>
+    <div>
+      <h4 class="text-red-400 font-serif text-lg mb-6">Explore</h4>
+      <ul class="space-y-3">
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="services.html">Services</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="gallery.html">Gallery</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="partners.html">Partners</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="contact.html">Contact</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-red-400 font-serif text-lg mb-6">Legal</h4>
+      <ul class="space-y-3">
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="#">Privacy Policy</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-red-400 font-serif text-lg mb-6">Contact</h4>
+      <ul class="space-y-3 text-neutral-500 text-sm">
+        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-red-400 text-base mt-0.5">location_on</span><span>123 MG Road, Pune 411001</span></li>
+        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-red-400 text-base">call</span><span>+91 98765 43210</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-10 text-center">
+    <p class="text-neutral-500 text-xs tracking-widest uppercase opacity-50">© 2025 Tk's Makeover. The Noir Atelier.</p>
+  </div>
+</footer>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919876543210?text=Hi!%20I%20would%20like%20to%20book%20an%20appointment." target="_blank"
+   class="animate-pulse-red fixed bottom-24 md:bottom-8 right-6 md:right-8 z-[60] bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-2xl group">
+  <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform" style="font-variation-settings:'FILL' 1">chat</span>
+</a>
+
+<!-- MOBILE FLOATING BOOK BTN -->
+<div class="md:hidden fixed bottom-6 left-4 right-4 z-50">
+  <a href="appointments.html" class="w-full bg-surface-container-highest backdrop-blur-xl border border-outline-variant/20 py-4 px-6 rounded-lg flex justify-between items-center shadow-2xl">
+    <span class="font-label text-xs uppercase tracking-widest text-on-surface font-bold">Book Appointment</span>
+    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+      <span class="material-symbols-outlined text-on-primary text-sm" style="font-variation-settings:'FILL' 1">calendar_month</span>
+    </div>
+  </a>
+</div>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const open = menu.classList.toggle('open');
+  document.getElementById('hl1').style.transform  = open ? 'translateY(7px) rotate(45deg)'   : '';
+  document.getElementById('hl2').style.opacity    = open ? '0' : '1';
+  document.getElementById('hl3').style.transform  = open ? 'translateY(-7px) rotate(-45deg)' : '';
+}
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*100); io.unobserve(e.target); } });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>

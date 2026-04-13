@@ -1,97 +1,336 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact | Glamour Studio</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact | Tk's Makeover</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-primary-fixed-variant": "#920027",
+          "on-surface": "#e5e2e1",
+          "secondary-container": "#fecb00",
+          "surface-dim": "#131313",
+          "primary-container": "#ff5167",
+          "on-primary": "#680019",
+          "primary-fixed-dim": "#ffb3b5",
+          "primary": "#ffb3b5",
+          "secondary": "#ffecc0",
+          "tertiary": "#c6c6c7",
+          "surface-container-high": "#2a2a2a",
+          "surface-container-highest": "#353534",
+          "surface-container-low": "#1c1b1b",
+          "surface": "#131313",
+          "surface-container": "#201f1f",
+          "background": "#131313",
+          "outline-variant": "#5d3f40",
+          "on-primary-container": "#5b0015",
+        },
+        fontFamily: { "headline": ["Noto Serif"], "body": ["Inter"], "label": ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+  .card-glow:hover { box-shadow: 0 0 40px -10px rgba(255,81,103,0.2); }
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: flex; }
+  @keyframes pulse-red {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 0    rgba(255,81,103,.4); }
+    70%  { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255,81,103,0); }
+    100% { transform: scale(1);    box-shadow: 0 0 0 0    rgba(255,81,103,0); }
+  }
+  .animate-pulse-red { animation: pulse-red 2s infinite; }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* Form input styling */
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(255,81,103,0.5);
+  }
+</style>
 </head>
-<body>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary">
 
-  <!-- NAVIGATION -->
 <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
-    <div class="logo">Tk's <span>Makeover</span></div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="appointments.html" class="nav-cta">Book Now</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<header class="fixed top-0 w-full z-50 bg-neutral-900/60 backdrop-blur-xl shadow-2xl shadow-black/20">
+  <nav class="flex justify-between items-center px-6 md:px-8 py-4">
+    <a href="index.html" class="text-xl md:text-2xl font-serif tracking-tighter text-neutral-100">Tk's Makeover</a>
+    <div class="hidden md:flex items-center gap-8 lg:gap-10">
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="index.html">Home</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="services.html">Services</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="gallery.html">Gallery</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="partners.html">Partners</a>
+      <a class="text-red-400 font-medium border-b border-red-400 pb-0.5 text-xs uppercase tracking-widest" href="contact.html">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="appointments.html" class="bg-primary-container text-on-primary-container px-4 py-2 text-xs font-bold uppercase tracking-widest hover:opacity-80 active:scale-95 transition-all">Book Now</a>
+      <button class="md:hidden flex flex-col justify-center gap-[5px] p-1" onclick="toggleMenu()">
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl1"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl2"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl3"></span>
+      </button>
+    </div>
   </nav>
+  <div id="mobile-menu" class="flex-col items-center gap-5 py-8 bg-neutral-950/98 backdrop-blur-xl border-t border-white/5 text-center">
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="index.html" onclick="toggleMenu()">Home</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="services.html" onclick="toggleMenu()">Services</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="gallery.html" onclick="toggleMenu()">Gallery</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="partners.html" onclick="toggleMenu()">Partners</a>
+    <a class="text-red-400 text-sm uppercase tracking-widest font-medium" href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="appointments.html" onclick="toggleMenu()" class="mt-2 inline-block bg-primary-container text-on-primary-container px-10 py-3 text-xs font-bold uppercase tracking-widest">Book Now</a>
+  </div>
+</header>
 
-  <!-- PAGE HEADER -->
-  <section class="page-header">
-    <h1>Contact Us</h1>
-    <p>We'd love to hear from you</p>
+<main class="pt-28 md:pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+
+  <!-- HERO -->
+  <section class="mb-12 md:mb-20 fade-in">
+    <h1 class="font-headline text-4xl md:text-7xl lg:text-8xl text-on-surface leading-none mb-4 md:mb-6 tracking-tighter">
+      Get in <span class="italic text-primary">Touch.</span>
+    </h1>
+    <p class="font-body text-base md:text-xl text-tertiary max-w-2xl leading-relaxed">
+      Experience the art of transformation at our Noir Atelier. Whether it's a query or a reservation, our curators are here to assist.
+    </p>
   </section>
 
-  <!-- CONTACT SECTION -->
-  <section class="contact-section">
+  <!-- BENTO CONTACT CARDS -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-20">
 
-    <!-- CONTACT CARDS -->
-    <div class="contact-cards">
-
-      <div class="contact-card">
-        <span>📍</span>
-        <h3>Address</h3>
-        <p>123, MG Road, Koregaon Park<br/>Pune, Maharashtra 411001</p>
+    <!-- Address -->
+    <div class="bg-surface-container-low p-6 md:p-8 rounded shadow-sm border-l-2 border-primary-container/20 hover:bg-surface-container-high transition-all duration-500 card-glow fade-in">
+      <div class="mb-4 md:mb-6">
+        <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">location_on</span>
       </div>
+      <h3 class="font-headline text-xl md:text-2xl mb-3 md:mb-4 text-neutral-100">Atelier Location</h3>
+      <p class="text-tertiary leading-relaxed font-light text-sm md:text-base">
+        123 MG Road,<br/>
+        Koregaon Park,<br/>
+        Pune 411001
+      </p>
+    </div>
 
-      <div class="contact-card">
-        <span>📞</span>
-        <h3>Phone</h3>
-        <p>+91 98765 43210</p>
-        <p>Mon – Sat: 10am to 7pm</p>
+    <!-- Phone -->
+    <div class="bg-surface-container-low p-6 md:p-8 rounded shadow-sm border-l-2 border-secondary-container/20 hover:bg-surface-container-high transition-all duration-500 card-glow fade-in">
+      <div class="mb-4 md:mb-6">
+        <span class="material-symbols-outlined text-secondary text-2xl md:text-3xl">call</span>
       </div>
+      <h3 class="font-headline text-xl md:text-2xl mb-3 md:mb-4 text-neutral-100">Private Line</h3>
+      <p class="text-tertiary leading-relaxed font-light text-sm md:text-base">
+        Reception: +91 98765 43210<br/>
+        Mon – Sat: 10am to 7pm
+      </p>
+    </div>
 
-      <div class="contact-card">
-        <span>💬</span>
-        <h3>WhatsApp</h3>
-        <p>Chat with us directly</p>
-        
-          href="https://api.whatsapp.com/qr/YPGXSJXO3D3JD1?autoload=1&app_absent=0"
-          <!-- target="_blank"
-          class="btn whatsapp-btn"> -->
-          Chat on WhatsApp
+    <!-- WhatsApp -->
+    <div class="bg-surface-container-low p-6 md:p-8 rounded shadow-sm border-l-2 border-primary-container/20 hover:bg-surface-container-high transition-all duration-500 card-glow fade-in">
+      <div class="mb-4 md:mb-6">
+        <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">chat</span>
+      </div>
+      <h3 class="font-headline text-xl md:text-2xl mb-3 md:mb-4 text-neutral-100">Concierge Chat</h3>
+      <p class="text-tertiary leading-relaxed font-light text-sm md:text-base mb-4">
+        Instant Booking via WhatsApp.<br/>
+        Available during salon hours.
+      </p>
+      <a href="https://wa.me/919876543210?text=Hi! I would like to book an appointment."
+         target="_blank"
+         class="inline-flex items-center gap-2 text-primary text-xs uppercase tracking-widest border-b border-primary/30 hover:border-primary transition-colors pb-0.5">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">chat</span>
+        Chat Now
+      </a>
+    </div>
+
+    <!-- Hours -->
+    <div class="bg-surface-container-low p-6 md:p-8 rounded shadow-sm border-l-2 border-secondary-container/20 hover:bg-surface-container-high transition-all duration-500 card-glow fade-in">
+      <div class="mb-4 md:mb-6">
+        <span class="material-symbols-outlined text-secondary text-2xl md:text-3xl">schedule</span>
+      </div>
+      <h3 class="font-headline text-xl md:text-2xl mb-3 md:mb-4 text-neutral-100">Curation Hours</h3>
+      <ul class="text-tertiary space-y-1.5 font-light text-sm">
+        <li class="flex justify-between gap-4"><span>Mon – Fri</span><span>10:00 – 19:00</span></li>
+        <li class="flex justify-between gap-4"><span>Saturday</span><span>10:00 – 18:00</span></li>
+        <li class="flex justify-between gap-4 text-primary/70"><span>Sunday</span><span>Closed</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- MAP + FORM -->
+  <div class="flex flex-col lg:flex-row gap-8 md:gap-12 items-stretch">
+
+    <!-- Map -->
+    <div class="flex-1 min-h-[300px] md:min-h-[450px] bg-surface-container-high rounded overflow-hidden relative group fade-in">
+      <img src="images/map-bg.png" alt="Location Map"
+           class="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-80 transition-opacity duration-700"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+      <div class="absolute bottom-6 left-6">
+        <a href="https://maps.google.com/?q=MG+Road+Koregaon+Park+Pune" target="_blank"
+           class="flex items-center gap-3 bg-surface/80 backdrop-blur-md px-4 py-3 rounded border border-outline-variant/20 hover:border-primary-container/40 transition-colors">
+          <span class="material-symbols-outlined text-primary text-base">explore</span>
+          <span class="text-xs font-medium tracking-widest uppercase">Open in Google Maps</span>
         </a>
       </div>
+      <!-- Also embed real Google Maps iframe underneath -->
+      <div class="absolute inset-0 opacity-0 group-hover:opacity-0">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.986!2d73.893!3d18.524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c06eb72af3c7!2sKoregaon+Park+Pune!5e0!3m2!1sen!2sin!4v1620000000000"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
 
-      <div class="contact-card">
-        <span>🕐</span>
-        <h3>Working Hours</h3>
-        <p>Monday – Saturday<br/>10:00 AM – 7:00 PM</p>
-        <p>Sunday: Closed</p>
+    <!-- Contact Form -->
+    <div class="lg:w-[420px] bg-surface-container-low p-8 md:p-10 rounded shadow-2xl fade-in">
+      <h2 class="font-headline text-2xl md:text-3xl mb-6 md:mb-8 text-neutral-100">Send a Message</h2>
+
+      <!-- Success message -->
+      <div id="form-success" class="hidden mb-6 p-4 bg-green-900/30 border border-green-500/30 rounded text-green-400 text-sm">
+        ✅ Message sent! We'll get back to you shortly.
       </div>
 
+      <form class="space-y-5 md:space-y-6" id="contact-form">
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.2em] text-tertiary mb-2">Full Name</label>
+          <input id="c-name" type="text" placeholder="Your full name"
+                 class="w-full bg-surface-container-high border border-outline-variant/20 focus:border-primary px-3 py-3 text-on-surface text-sm transition-all duration-300 rounded-sm placeholder:text-neutral-700"/>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.2em] text-tertiary mb-2">Email Address</label>
+          <input id="c-email" type="email" placeholder="your@email.com"
+                 class="w-full bg-surface-container-high border border-outline-variant/20 focus:border-primary px-3 py-3 text-on-surface text-sm transition-all duration-300 rounded-sm placeholder:text-neutral-700"/>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.2em] text-tertiary mb-2">Inquiry Type</label>
+          <select id="c-type"
+                  class="w-full bg-surface-container-high border border-outline-variant/20 focus:border-primary px-3 py-3 text-on-surface text-sm transition-all duration-300 rounded-sm appearance-none">
+            <option value="Hairstyling">Hairstyling</option>
+            <option value="Hair Colour">Hair Colour</option>
+            <option value="Hair Spa">Hair Spa</option>
+            <option value="Bridal">Bridal</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.2em] text-tertiary mb-2">Message</label>
+          <textarea id="c-message" rows="4" placeholder="How can we help you?"
+                    class="w-full bg-surface-container-high border border-outline-variant/20 focus:border-primary px-3 py-3 text-on-surface text-sm transition-all duration-300 rounded-sm resize-none placeholder:text-neutral-700"></textarea>
+        </div>
+        <button type="button" onclick="sendMessage()"
+                class="w-full bg-primary-container text-on-primary-container font-bold py-3 md:py-4 uppercase tracking-[0.3em] text-xs md:text-sm hover:opacity-90 transition-all active:scale-[0.98]">
+          Send Inquiry
+        </button>
+      </form>
     </div>
 
-    <!-- GOOGLE MAPS EMBED -->
-    <div class="map-container">
-      <h2>Find Us Here</h2>
-      <iframe
-        src="https://www.google.com/maps/place/Tk's+Makeover/@17.0480715,75.2224406,416m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bc6c720a681763d:0xb1d6da0ad2a3ca0d!8m2!3d17.0480715!4d75.2231515!16s%2Fg%2F11xw88k4jv!5m1!1e4?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D"
-        width="100%"
-        height="380"
-        style="border:0; border-radius: 12px;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-neutral-950 w-full py-12 px-6 md:px-8">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+    <div class="space-y-4">
+      <div class="text-xl font-serif text-neutral-100">Tk's Makeover</div>
+      <p class="text-neutral-500 text-sm leading-relaxed">A destination for curated aesthetics and premium transformations. The ultimate Noir Atelier experience.</p>
     </div>
+    <div>
+      <h4 class="text-red-400 font-bold text-xs uppercase tracking-widest mb-6">Navigation</h4>
+      <ul class="space-y-3">
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm transition-colors" href="index.html">Home</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm transition-colors" href="services.html">Services</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm transition-colors" href="gallery.html">Gallery</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm transition-colors" href="partners.html">Partners</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm transition-colors" href="appointments.html">Book Now</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm transition-colors" href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-red-400 font-bold text-xs uppercase tracking-widest mb-6">Legal</h4>
+      <ul class="space-y-3">
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="#">Privacy Policy</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-red-400 font-bold text-xs uppercase tracking-widest mb-6">Newsletter</h4>
+      <div class="flex gap-2">
+        <input class="bg-neutral-900 border border-neutral-800 text-sm w-full py-2 px-4 focus:ring-1 focus:ring-red-400 text-neutral-300 placeholder:text-neutral-600 rounded-sm" placeholder="Email" type="text"/>
+        <button class="bg-red-400 text-neutral-950 px-4 py-2 hover:bg-red-300 transition-colors rounded-sm">
+          <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-neutral-500 text-xs tracking-widest">
+    © 2025 Tk's Makeover. The Noir Atelier.
+  </div>
+</footer>
 
-  </section>
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919876543210?text=Hi!%20I%20would%20like%20to%20book%20an%20appointment."
+   target="_blank"
+   class="fixed bottom-8 right-6 md:right-8 z-[60] bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-2xl animate-pulse-red group">
+  <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-300" style="font-variation-settings:'FILL' 1">chat</span>
+</a>
 
-  <!-- FOOTER -->
-<footer class="footer">
-    <p>© 2025 Tk's Makeover. Crafted with ❤️ for bold looks.</p>
-  </footer>
-  
+<script>
+// HAMBURGER
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const open = menu.classList.toggle('open');
+  document.getElementById('hl1').style.transform  = open ? 'translateY(7px) rotate(45deg)'   : '';
+  document.getElementById('hl2').style.opacity    = open ? '0' : '1';
+  document.getElementById('hl3').style.transform  = open ? 'translateY(-7px) rotate(-45deg)' : '';
+}
+
+// CONTACT FORM — opens WhatsApp with message
+function sendMessage() {
+  const name    = document.getElementById('c-name').value.trim();
+  const email   = document.getElementById('c-email').value.trim();
+  const type    = document.getElementById('c-type').value;
+  const message = document.getElementById('c-message').value.trim();
+
+  if (!name || !message) {
+    alert('Please fill in your name and message.');
+    return;
+  }
+
+  // Show success
+  document.getElementById('form-success').classList.remove('hidden');
+  document.getElementById('contact-form').reset();
+
+  // Also open WhatsApp with the message pre-filled
+  const waText = encodeURIComponent(
+    `Hi! I'm ${name}.\n\nInquiry: ${type}\n\n${message}\n\nEmail: ${email}`
+  );
+  setTimeout(() => {
+    window.open(`https://wa.me/919876543210?text=${waText}`, '_blank');
+  }, 500);
+
+  // Hide success after 5 seconds
+  setTimeout(() => {
+    document.getElementById('form-success').classList.add('hidden');
+  }, 5000);
+}
+
+// FADE IN
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 100);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
 </body>
 </html>

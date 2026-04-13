@@ -1,127 +1,401 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gallery | Glamour Studio</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gallery | Tk's Makeover</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-primary-fixed-variant": "#920027",
+          "on-surface": "#e5e2e1",
+          "secondary-container": "#fecb00",
+          "surface-dim": "#131313",
+          "primary-container": "#ff5167",
+          "on-primary": "#680019",
+          "primary-fixed-dim": "#ffb3b5",
+          "primary": "#ffb3b5",
+          "tertiary": "#c6c6c7",
+          "surface-container-high": "#2a2a2a",
+          "surface-container-highest": "#353534",
+          "surface-container-low": "#1c1b1b",
+          "surface": "#131313",
+          "surface-container": "#201f1f",
+          "secondary-fixed": "#ffe08b",
+          "background": "#131313",
+          "outline-variant": "#5d3f40",
+          "on-primary-container": "#5b0015",
+        },
+        fontFamily: { "headline": ["Noto Serif"], "body": ["Inter"], "label": ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+
+  /* Masonry grid */
+  .masonry-grid { column-count: 1; column-gap: 1rem; }
+  @media (min-width: 640px)  { .masonry-grid { column-count: 2; } }
+  @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+  .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+
+  /* Filter */
+  .filter-btn { transition: all 0.3s ease; }
+  .filter-btn.active { background: #ff5167; color: #5b0015; border-color: #ff5167; }
+
+  /* Gallery card hidden class */
+  .gallery-card.hidden-card { display: none; }
+
+  /* Hamburger */
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: flex; }
+
+  /* WhatsApp pulse */
+  @keyframes pulse-red {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 0    rgba(255,81,103,.5); }
+    70%  { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(255,81,103,0); }
+    100% { transform: scale(1);    box-shadow: 0 0 0 0    rgba(255,81,103,0); }
+  }
+  .animate-pulse-red { animation: pulse-red 2s infinite; }
+
+  /* Fade in */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* Lightbox */
+  #lightbox { display: none; }
+  #lightbox.open { display: flex; }
+</style>
 </head>
-<body>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-white">
 
-  <!-- NAVIGATION -->
 <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
-    <div class="logo">Tk's <span>Makeover</span></div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="appointments.html" class="nav-cta">Book Now</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<header class="fixed top-0 w-full z-50 bg-neutral-900/60 backdrop-blur-xl shadow-2xl shadow-black/20">
+  <nav class="flex justify-between items-center px-6 md:px-8 py-4">
+    <a href="index.html" class="text-xl md:text-2xl font-serif tracking-tighter text-neutral-100">Tk's Makeover</a>
+    <div class="hidden md:flex items-center gap-8 lg:gap-10">
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="index.html">Home</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="services.html">Services</a>
+      <a class="text-red-400 font-medium border-b border-red-400 pb-0.5 text-xs uppercase tracking-widest" href="gallery.html">Gallery</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="partners.html">Partners</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all" href="contact.html">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="appointments.html" class="bg-primary-container text-on-primary-container px-4 py-2 text-xs font-bold uppercase tracking-widest hover:opacity-80 active:scale-95 transition-all">Book Now</a>
+      <button class="md:hidden flex flex-col justify-center gap-[5px] p-1" onclick="toggleMenu()">
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl1"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl2"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl3"></span>
+      </button>
+    </div>
   </nav>
+  <div id="mobile-menu" class="flex-col items-center gap-5 py-8 bg-neutral-950/98 backdrop-blur-xl border-t border-white/5 text-center">
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="index.html" onclick="toggleMenu()">Home</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="services.html" onclick="toggleMenu()">Services</a>
+    <a class="text-red-400 text-sm uppercase tracking-widest font-medium" href="gallery.html" onclick="toggleMenu()">Gallery</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="partners.html" onclick="toggleMenu()">Partners</a>
+    <a class="text-neutral-400 text-sm uppercase tracking-widest" href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="appointments.html" onclick="toggleMenu()" class="mt-2 inline-block bg-primary-container text-on-primary-container px-10 py-3 text-xs font-bold uppercase tracking-widest">Book Now</a>
+  </div>
+</header>
 
-  <!-- PAGE HEADER -->
-  <section class="page-header">
-    <h1>Our Gallery</h1>
-    <p>A glimpse of the transformations we create</p>
-  </section>
+<main class="pt-28 md:pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
 
-  <!-- GALLERY GRID -->
-  <section class="gallery-section">
+  <!-- HEADER -->
+  <header class="mb-10 md:mb-16 fade-in">
+    <span class="text-secondary-fixed font-medium tracking-[0.3em] uppercase text-xs mb-4 block">The Noir Atelier</span>
+    <h1 class="font-serif text-4xl md:text-7xl lg:text-8xl tracking-tighter leading-none mb-6 md:mb-8">Visual Anthology</h1>
+    <p class="text-tertiary max-w-2xl text-base md:text-lg leading-relaxed font-light">
+      Explore our curated collection of transformations. Every frame is a testament to the intersection of artistry and precision, captured within the sanctuary of our studio.
+    </p>
+  </header>
 
-    <div class="gallery-filter">
-      <button class="filter-btn active" onclick="filterGallery('all')">All</button>
-      <button class="filter-btn" onclick="filterGallery('haircut')">Hair Cuts</button>
-      <button class="filter-btn" onclick="filterGallery('colour')">Hair Colour</button>
-      <button class="filter-btn" onclick="filterGallery('styling')">Styling</button>
+  <!-- FILTER BUTTONS -->
+  <div class="flex flex-wrap gap-3 mb-10 md:mb-12 fade-in">
+    <button onclick="filterGallery('all', this)"
+            class="filter-btn active px-5 py-2 border border-primary-container text-xs uppercase tracking-widest font-bold rounded-sm">
+      All
+    </button>
+    <button onclick="filterGallery('haircuts', this)"
+            class="filter-btn px-5 py-2 border border-white/20 text-neutral-400 text-xs uppercase tracking-widest font-bold rounded-sm hover:border-white/40 hover:text-white transition-all">
+      Hair Cuts
+    </button>
+    <button onclick="filterGallery('colour', this)"
+            class="filter-btn px-5 py-2 border border-white/20 text-neutral-400 text-xs uppercase tracking-widest font-bold rounded-sm hover:border-white/40 hover:text-white transition-all">
+      Colour
+    </button>
+    <button onclick="filterGallery('styling', this)"
+            class="filter-btn px-5 py-2 border border-white/20 text-neutral-400 text-xs uppercase tracking-widest font-bold rounded-sm hover:border-white/40 hover:text-white transition-all">
+      Styling
+    </button>
+  </div>
+
+  <!-- MASONRY GALLERY GRID -->
+  <div class="masonry-grid" id="gallery-grid">
+
+    <!-- Card 1 -->
+    <div class="masonry-item gallery-card" data-category="haircuts"
+         onclick="openLightbox('images/gallery/img1.jpg', 'Hair Cuts', 'The Barber\'s Arsenal', 'Precision tools for the perfect cut. Every detail matters in our craft.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img1.jpg" alt="Barber Tools"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[4/3]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-primary text-xs tracking-widest uppercase mb-1">Hair Cuts</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">The Barber's Arsenal</h3>
+        </div>
+      </div>
     </div>
 
-    <div class="gallery-grid" id="gallery-grid">
-
-      <div class="gallery-item" data-category="haircut">
-        <div class="gallery-placeholder">💇‍♀️</div>
-        <div class="gallery-overlay">
-          <p>Women's Haircut</p>
+    <!-- Card 2 -->
+    <div class="masonry-item gallery-card" data-category="styling"
+         onclick="openLightbox('images/gallery/img2.jpg', 'Styling', 'Grooming Essentials', 'Premium products for the discerning gentleman.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img2.jpg" alt="Grooming Products"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[3/4]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-secondary-fixed text-xs tracking-widest uppercase mb-1">Styling</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">Grooming Essentials</h3>
         </div>
       </div>
-
-      <div class="gallery-item" data-category="colour">
-        <div class="gallery-placeholder">🎨</div>
-        <div class="gallery-overlay">
-          <p>Balayage</p>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-category="styling">
-        <div class="gallery-placeholder">✨</div>
-        <div class="gallery-overlay">
-          <p>Bridal Updo</p>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-category="haircut">
-        <div class="gallery-placeholder">✂️</div>
-        <div class="gallery-overlay">
-          <p>Men's Haircut</p>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-category="colour">
-        <div class="gallery-placeholder">🌈</div>
-        <div class="gallery-overlay">
-          <p>Highlights</p>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-category="styling">
-        <div class="gallery-placeholder">💫</div>
-        <div class="gallery-overlay">
-          <p>Blow Dry</p>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-category="colour">
-        <div class="gallery-placeholder">🎭</div>
-        <div class="gallery-overlay">
-          <p>Global Colour</p>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-category="styling">
-        <div class="gallery-placeholder">👑</div>
-        <div class="gallery-overlay">
-          <p>Hair Straightening</p>
-        </div>
-      </div>
-
-      <div class="gallery-item" data-category="haircut">
-        <div class="gallery-placeholder">🌸</div>
-        <div class="gallery-overlay">
-          <p>Kids Haircut</p>
-        </div>
-      </div>
-
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Love What You See?</h2>
-    <p>Book your own transformation today.</p>
-    <a href="appointments.html" class="btn">Book Now</a>
-  </section>
+    <!-- Card 3 -->
+    <div class="masonry-item gallery-card" data-category="haircuts"
+         onclick="openLightbox('images/gallery/img3.jpg', 'Hair Cuts', 'The Wash Station', 'Where the transformation begins — our signature wash experience.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img3.jpg" alt="Wash Sinks"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[4/5]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-primary text-xs tracking-widest uppercase mb-1">Hair Cuts</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">The Wash Station</h3>
+        </div>
+      </div>
+    </div>
 
-  <!-- FOOTER -->
-<footer class="footer">
-    <p>© 2025 Tk's Makeover. Crafted with ❤️ for bold looks.</p>
-  </footer>
+    <!-- Card 4 -->
+    <div class="masonry-item gallery-card" data-category="styling"
+         onclick="openLightbox('images/gallery/img4.jpg', 'Styling', 'Luxury Pomade', 'Choco Loco oil-based pomade for that perfect hold and shine.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img4.jpg" alt="Pomade"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[1/1]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-secondary-fixed text-xs tracking-widest uppercase mb-1">Styling</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">Luxury Pomade</h3>
+        </div>
+      </div>
+    </div>
 
-  <script src="js/main.js"></script>
+    <!-- Card 5 -->
+    <div class="masonry-item gallery-card" data-category="haircuts"
+         onclick="openLightbox('images/gallery/img5.jpg', 'Hair Cuts', 'The Classic Chair', 'Where legends are made. Our signature barber chair awaits.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img5.jpg" alt="Barber Chair"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[3/4]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-primary text-xs tracking-widest uppercase mb-1">Hair Cuts</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">The Classic Chair</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="masonry-item gallery-card" data-category="colour"
+         onclick="openLightbox('images/gallery/img6.jpg', 'Colour', 'Modern Atelier', 'Our light-filled studio space where colour magic happens.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img6.jpg" alt="Modern Salon"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[4/3]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-primary text-xs tracking-widest uppercase mb-1">Colour</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">Modern Atelier</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="masonry-item gallery-card" data-category="colour"
+         onclick="openLightbox('images/gallery/img7.jpg', 'Colour', 'Noir Studio', 'Dark walls, bold mirrors — the perfect backdrop for your transformation.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img7.jpg" alt="Black Wall Salon"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[4/3]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-primary text-xs tracking-widest uppercase mb-1">Colour</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">Noir Studio</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="masonry-item gallery-card" data-category="styling"
+         onclick="openLightbox('images/gallery/img8.jpg', 'Styling', 'Curated Products', 'A curated shelf of professional products reflecting in our signature mirrors.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img8.jpg" alt="Products Mirror"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[3/4]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-secondary-fixed text-xs tracking-widest uppercase mb-1">Styling</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">Curated Products</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="masonry-item gallery-card" data-category="colour"
+         onclick="openLightbox('images/gallery/img9.jpg', 'Colour', 'The Sanctuary', 'Step inside our sanctuary — every corner tells a story of elegance.')">
+      <div class="group relative overflow-hidden bg-surface-container-low cursor-pointer">
+        <img src="images/gallery/img9.png" alt="Salon Interior"
+             class="w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out aspect-[4/3]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+          <p class="text-primary text-xs tracking-widest uppercase mb-1">Colour</p>
+          <h3 class="font-serif text-lg md:text-2xl text-on-surface">The Sanctuary</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md items-center justify-center p-4 md:p-8">
+  <button onclick="closeLightbox()" class="absolute top-6 right-6 text-on-surface hover:text-primary transition-colors z-10">
+    <span class="material-symbols-outlined text-4xl">close</span>
+  </button>
+  <div class="max-w-5xl w-full flex flex-col md:flex-row items-center gap-8 md:gap-12">
+    <div class="w-full md:w-2/3 max-h-[60vh] md:max-h-[80vh] overflow-hidden bg-surface-container-highest rounded-sm">
+      <img id="lightbox-img" src="" alt="Gallery Image" class="w-full h-full object-cover"/>
+    </div>
+    <div class="w-full md:w-1/3 text-left">
+      <p id="lightbox-category" class="text-primary tracking-[0.2em] uppercase text-xs md:text-sm mb-3 md:mb-4"></p>
+      <h2 id="lightbox-title" class="font-serif text-2xl md:text-4xl mb-4 md:mb-6"></h2>
+      <p id="lightbox-desc" class="text-tertiary mb-6 md:mb-8 leading-relaxed text-sm md:text-base"></p>
+      <a href="appointments.html" class="block w-full py-3 md:py-4 bg-primary-container text-on-primary-container font-bold tracking-widest text-xs md:text-sm uppercase text-center hover:opacity-80 transition-opacity">
+        Book This Service
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-neutral-950 w-full py-12 px-6 md:px-8">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+    <div class="col-span-1 md:col-span-2">
+      <div class="text-xl font-serif text-neutral-100 mb-4">Tk's Makeover</div>
+      <p class="text-neutral-500 max-w-sm leading-relaxed mb-6 text-sm">An editorial sanctuary for hair and beauty. We believe in the power of visual storytelling through personalized transformation.</p>
+    </div>
+    <div>
+      <h4 class="text-on-surface font-semibold mb-6 uppercase tracking-widest text-xs">Explore</h4>
+      <ul class="space-y-3">
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="services.html">Services</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="gallery.html">Gallery</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="partners.html">Partners</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="appointments.html">Book Now</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 text-sm" href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-on-surface font-semibold mb-6 uppercase tracking-widest text-xs">Visit</h4>
+      <p class="text-neutral-500 leading-relaxed text-sm">
+        123 MG Road, Koregaon Park<br/>
+        Pune, Maharashtra 411001<br/>
+        <span class="text-red-400 mt-2 block">+91 98765 43210</span>
+      </p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase text-neutral-600 gap-4">
+    <p>© 2025 Tk's Makeover. The Noir Atelier.</p>
+    <p>Crafted for Excellence</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919876543210?text=Hi!%20I%20would%20like%20to%20book%20an%20appointment." target="_blank"
+   class="animate-pulse-red fixed bottom-20 md:bottom-8 right-6 md:right-8 z-[60] bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-2xl group">
+  <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform" style="font-variation-settings:'FILL' 1">chat</span>
+</a>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-neutral-900/90 backdrop-blur-xl flex justify-around items-center py-3 z-50 border-t border-white/5">
+  <a class="flex flex-col items-center text-neutral-500 transition-colors" href="index.html">
+    <span class="material-symbols-outlined text-xl">home</span>
+    <span class="text-[9px] mt-0.5">Home</span>
+  </a>
+  <a class="flex flex-col items-center text-red-400 transition-colors" href="gallery.html">
+    <span class="material-symbols-outlined text-xl">grid_view</span>
+    <span class="text-[9px] mt-0.5">Gallery</span>
+  </a>
+  <a class="flex flex-col items-center text-neutral-500 transition-colors" href="appointments.html">
+    <span class="material-symbols-outlined text-xl">calendar_today</span>
+    <span class="text-[9px] mt-0.5">Book</span>
+  </a>
+  <a class="flex flex-col items-center text-neutral-500 transition-colors" href="contact.html">
+    <span class="material-symbols-outlined text-xl">location_on</span>
+    <span class="text-[9px] mt-0.5">Contact</span>
+  </a>
+</div>
+
+<script>
+// HAMBURGER
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const open = menu.classList.toggle('open');
+  document.getElementById('hl1').style.transform  = open ? 'translateY(7px) rotate(45deg)'   : '';
+  document.getElementById('hl2').style.opacity    = open ? '0' : '1';
+  document.getElementById('hl3').style.transform  = open ? 'translateY(-7px) rotate(-45deg)' : '';
+}
+
+// GALLERY FILTER
+function filterGallery(category, btn) {
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Show/hide cards
+  document.querySelectorAll('.gallery-card').forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.classList.remove('hidden-card');
+    } else {
+      card.classList.add('hidden-card');
+    }
+  });
+}
+
+// LIGHTBOX
+function openLightbox(src, category, title, desc) {
+  document.getElementById('lightbox-img').src      = src;
+  document.getElementById('lightbox-category').textContent = category;
+  document.getElementById('lightbox-title').textContent    = title;
+  document.getElementById('lightbox-desc').textContent     = desc;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close lightbox on background click
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+// Close on ESC key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// FADE IN
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); io.unobserve(e.target); }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>

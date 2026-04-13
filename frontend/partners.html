@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Partners | Tk's Makeover</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "bg":           "#0e0e0e",
+            "surface":      "#131313",
+            "surface-low":  "#1c1b1b",
+            "surface-card": "#201f1f",
+            "surface-hi":   "#2a2a2a",
+            "outline":      "#5d3f40",
+            "on-bg":        "#e5e2e1",
+            "muted":        "#c6c6c7",
+            "accent-red":   "#ff5167",
+            "accent-pink":  "#ffb3b5",
+            "accent-gold":  "#fecb00",
+          },
+          fontFamily: {
+            serif:  ["Cormorant Garamond", "Georgia", "serif"],
+            sans:   ["Inter", "system-ui", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ── Marquee ── */
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee { animation: marquee 35s linear infinite; }
+
+    /* ── Hover glow ── */
+    .card-hover:hover {
+      box-shadow: 0 0 28px rgba(255,81,103,.12);
+      border-color: rgba(255,81,103,.25) !important;
+    }
+
+    /* ── Underline grow ── */
+    .underline-grow { transition: width .45s ease; }
+    .group:hover .underline-grow { width: 100% !important; }
+
+    /* ── Fade-in on scroll ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Gold shimmer on hero image ── */
+    @keyframes shimmer {
+      0%,100% { opacity:.08; }
+      50%      { opacity:.18; }
+    }
+    .shimmer { animation: shimmer 4s ease-in-out infinite; }
+
+    /* ── Tag pill ── */
+    .tag {
+      display:inline-block;
+      padding: 2px 10px;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* ── Hamburger ── */
+    #mobile-menu { display:none; }
+    #mobile-menu.open { display:flex; }
+    .hamburger span {
+      display:block; width:22px; height:2px;
+      background:#e5e2e1; margin:4px 0;
+      transition: all .3s ease;
+    }
+  </style>
+</head>
+<body class="bg-bg text-on-bg font-sans selection:bg-accent-red selection:text-white">
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5">
+    <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-screen-xl mx-auto">
+      <a href="index.html" class="font-serif text-2xl tracking-tight text-neutral-100">Tk's <span class="text-accent-red">Makeover</span></a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-8 text-sm">
+        <li><a href="index.html"       class="text-neutral-400 hover:text-neutral-100 transition-colors">Home</a></li>
+        <li><a href="services.html"    class="text-neutral-400 hover:text-neutral-100 transition-colors">Services</a></li>
+        <li><a href="gallery.html"     class="text-neutral-400 hover:text-neutral-100 transition-colors">Gallery</a></li>
+        <li><a href="partners.html"    class="text-accent-red font-medium border-b border-accent-red pb-0.5">Partners</a></li>
+        <li><a href="contact.html"     class="text-neutral-400 hover:text-neutral-100 transition-colors">Contact</a></li>
+      </ul>
+
+      <a href="appointments.html" class="hidden md:inline-block bg-accent-red text-white px-6 py-2 text-xs font-bold uppercase tracking-widest hover:opacity-85 transition-all">Book Now</a>
+
+      <!-- Hamburger -->
+      <button class="hamburger md:hidden flex flex-col justify-center" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="flex-col px-6 pb-6 gap-4 bg-black/90 border-t border-white/5 text-sm">
+      <a href="index.html"    class="text-neutral-400 hover:text-neutral-100 transition-colors">Home</a>
+      <a href="services.html" class="text-neutral-400 hover:text-neutral-100 transition-colors">Services</a>
+      <a href="gallery.html"  class="text-neutral-400 hover:text-neutral-100 transition-colors">Gallery</a>
+      <a href="partners.html" class="text-accent-red font-medium">Partners</a>
+      <a href="contact.html"  class="text-neutral-400 hover:text-neutral-100 transition-colors">Contact</a>
+      <a href="appointments.html" class="bg-accent-red text-white text-center py-3 font-bold text-xs tracking-widest uppercase">Book Now</a>
+    </div>
+  </nav>
+
+  <main class="pt-20">
+
+    <!-- ══════════ MARQUEE TICKER ══════════ -->
+    <div class="overflow-hidden bg-surface-low py-7 border-b border-white/5">
+      <div class="flex whitespace-nowrap animate-marquee select-none">
+        <div class="flex gap-14 px-8 items-center">
+          <span class="font-serif italic text-3xl text-muted/35">L'Oréal</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Wella</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Schwarzkopf</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Kérastase</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Matrix</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">TRESemmé</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Pantene</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Dove</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Streax</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Biotique</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Indulekha</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+        </div>
+        <!-- duplicate for loop -->
+        <div class="flex gap-14 px-8 items-center">
+          <span class="font-serif italic text-3xl text-muted/35">L'Oréal</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Wella</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Schwarzkopf</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Kérastase</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Matrix</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">TRESemmé</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Pantene</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Dove</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Streax</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Biotique</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+          <span class="font-serif italic text-3xl text-muted/35">Indulekha</span>
+          <span class="text-accent-red/30 text-lg">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="relative min-h-[88vh] flex items-center overflow-hidden bg-surface-low">
+      <!-- Gradient blobs -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-accent-red/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent-gold/4 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3"></div>
+      </div>
+
+      <div class="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-24">
+        <!-- Text -->
+        <div class="reveal">
+          <span class="text-accent-red text-xs font-bold tracking-[.3em] uppercase block mb-6">01 / Global Alliances</span>
+          <h1 class="font-serif text-6xl md:text-7xl xl:text-8xl leading-[1.05] mb-8">
+            Global<br/>
+            <em class="text-accent-red not-italic">Alliances</em>
+          </h1>
+          <p class="text-muted text-base leading-relaxed max-w-md mb-10">
+            We curate only the finest professional formulations from across the globe, ensuring your transformation is backed by scientific excellence and editorial luxury.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#international" class="bg-accent-red text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:opacity-85 transition-all">Explore Brands</a>
+            <a href="appointments.html" class="border border-white/15 text-on-bg px-8 py-3 text-xs font-bold uppercase tracking-widest hover:border-accent-red/50 transition-all">Book Now</a>
+          </div>
+        </div>
+
+        <!-- Product Image -->
+        <div class="reveal relative flex justify-center lg:justify-end" style="transition-delay:.2s">
+          <div class="relative w-72 md:w-96">
+            <!-- Glow behind image -->
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-700/20 via-yellow-600/10 to-transparent blur-2xl shimmer"></div>
+            <img
+              src="images/product-hero.png"
+              alt="Premium professional hair care products"
+              class="relative z-10 w-full object-contain drop-shadow-2xl"
+              style="filter: drop-shadow(0 20px 60px rgba(201,153,50,.25));"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ INTERNATIONAL BRANDS ══════════ -->
+    <section id="international" class="py-28 bg-bg">
+      <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+
+        <!-- Section header -->
+        <div class="reveal mb-16">
+          <span class="text-accent-pink text-xs font-bold tracking-[.3em] uppercase block mb-4">International Selection</span>
+          <div class="flex items-end justify-between flex-wrap gap-4">
+            <h2 class="font-serif text-5xl md:text-6xl leading-tight">
+              Global <em class="text-accent-red">Professional</em><br/>Brands
+            </h2>
+            <span class="text-muted/40 text-xs tracking-widest uppercase font-bold self-end pb-2">01 / Global Mastery</span>
+          </div>
+          <div class="h-px bg-white/8 mt-8"></div>
+        </div>
+
+        <!-- 4-col grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 reveal">
+          <!-- L'Oréal -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">Hair Care</span>
+            <h3 class="font-serif text-2xl mb-3">L'Oréal</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">Advanced molecular technology for professional results in colouring and texture management.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Hair Colour</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Treatments</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Styling</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+
+          <!-- Wella -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">Professional</span>
+            <h3 class="font-serif text-2xl mb-3">Wella</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">Unrivaled excellence in color science, delivering vibrant, long-lasting hair transformations.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Colour</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Shampoo</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Conditioner</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+
+          <!-- Schwarzkopf -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">European</span>
+            <h3 class="font-serif text-2xl mb-3">Schwarzkopf</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">A heritage of innovation providing sophisticated styling and reparative hair solutions.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Blonding</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Colour</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Care</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+
+          <!-- Kérastase -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">Luxury</span>
+            <h3 class="font-serif text-2xl mb-3">Kérastase</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">Bespoke hair rituals that transform the scalp and fibre into a state of perfection.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Hair Spa</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Keratin</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Luxury Care</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+
+          <!-- Matrix -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">Solution</span>
+            <h3 class="font-serif text-2xl mb-3">Matrix</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">Inclusive professional beauty products designed for every hair type and need.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Colour</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Styling</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Care</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+
+          <!-- TRESemmé -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">Runway</span>
+            <h3 class="font-serif text-2xl mb-3">TRESemmé</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">Salon-quality styling used by top professionals to achieve catwalk-ready hair.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Shampoo</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Blow Dry</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Styling</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+
+          <!-- Pantene -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">Nourishment</span>
+            <h3 class="font-serif text-2xl mb-3">Pantene</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">The science of Pro-Vitamin for visibly healthier and stronger hair daily.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Shampoo</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Conditioner</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Hair Fall</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+
+          <!-- Dove -->
+          <div class="bg-surface p-8 card-hover transition-all duration-500 border border-transparent group">
+            <span class="text-xs text-accent-pink font-semibold tracking-widest block mb-4 uppercase">Care</span>
+            <h3 class="font-serif text-2xl mb-3">Dove</h3>
+            <p class="text-muted text-sm leading-relaxed mb-6">Gentle formulations and deep moisture for skin and hair health, post-colour.</p>
+            <div class="flex flex-wrap mb-5">
+              <span class="tag bg-accent-red/10 text-accent-pink">Conditioning</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Damage Repair</span>
+              <span class="tag bg-accent-red/10 text-accent-pink">Moisture</span>
+            </div>
+            <div class="h-px w-0 underline-grow bg-accent-red"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ MADE IN INDIA ══════════ -->
+    <section class="py-28 bg-surface">
+      <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+          <!-- Left label column -->
+          <div class="lg:col-span-4 reveal">
+            <span class="text-accent-gold text-xs font-bold tracking-[.3em] uppercase block mb-4">02 / Domestic Heritage</span>
+            <h2 class="font-serif text-5xl md:text-6xl leading-tight mb-8">
+              Made in<br/>
+              <em class="text-accent-gold">India</em>
+            </h2>
+            <p class="text-muted leading-relaxed">Celebrating the botanical wisdom and innovative strength of Indian laboratories. We partner with brands that understand the unique needs of our climate and hair textures.</p>
+          </div>
+
+          <!-- Cards -->
+          <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6 reveal" style="transition-delay:.15s">
+
+            <!-- Streax -->
+            <div class="bg-surface-card p-10 border-l-2 border-accent-gold/30 card-hover transition-all group">
+              <span class="inline-block px-3 py-1 bg-accent-gold/10 text-accent-gold text-[10px] uppercase font-bold tracking-widest mb-6">Color Expert</span>
+              <h3 class="font-serif text-3xl mb-4">Streax</h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">Vibrant colour shades and intensive care specifically engineered for Indian hair aesthetics.</p>
+              <div class="flex flex-wrap">
+                <span class="tag bg-accent-gold/10 text-accent-gold">Hair Colour</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Highlights</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Serum</span>
+              </div>
+            </div>
+
+            <!-- Biotique -->
+            <div class="bg-surface-card p-10 border-l-2 border-accent-gold/30 card-hover transition-all group">
+              <span class="inline-block px-3 py-1 bg-accent-gold/10 text-accent-gold text-[10px] uppercase font-bold tracking-widest mb-6">Ayurveda</span>
+              <h3 class="font-serif text-3xl mb-4">Biotique</h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">The perfect blend of 21st-century biotechnology and ancient Ayurvedic wisdom for skin and hair.</p>
+              <div class="flex flex-wrap">
+                <span class="tag bg-accent-gold/10 text-accent-gold">Ayurvedic</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Natural</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Scalp Care</span>
+              </div>
+            </div>
+
+            <!-- Indulekha -->
+            <div class="bg-surface-card p-10 border-l-2 border-accent-gold/30 card-hover transition-all group">
+              <span class="inline-block px-3 py-1 bg-accent-gold/10 text-accent-gold text-[10px] uppercase font-bold tracking-widest mb-6">Traditional</span>
+              <h3 class="font-serif text-3xl mb-4">Indulekha</h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">Deeply rooted hair-fall solutions powered by clinically proven botanical extracts.</p>
+              <div class="flex flex-wrap">
+                <span class="tag bg-accent-gold/10 text-accent-gold">Hair Oil</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Hair Fall</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Scalp</span>
+              </div>
+            </div>
+
+            <!-- Bajaj -->
+            <div class="bg-surface-card p-10 border-l-2 border-accent-gold/30 card-hover transition-all group">
+              <span class="inline-block px-3 py-1 bg-accent-gold/10 text-accent-gold text-[10px] uppercase font-bold tracking-widest mb-6">Essentials</span>
+              <h3 class="font-serif text-3xl mb-4">Bajaj Almond Drops</h3>
+              <p class="text-muted text-sm leading-relaxed mb-4">Vitamin-E enriched nourishment for effortless shine and manageable hair textures.</p>
+              <div class="flex flex-wrap">
+                <span class="tag bg-accent-gold/10 text-accent-gold">Hair Oil</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Scalp Massage</span>
+                <span class="tag bg-accent-gold/10 text-accent-gold">Nourishment</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CTA ══════════ -->
+    <section class="py-28 px-6 bg-bg">
+      <div class="max-w-4xl mx-auto relative overflow-hidden reveal" style="backdrop-filter:blur(14px); background:rgba(28,27,27,.75); border:1px solid rgba(255,81,103,.12);">
+        <!-- Glow -->
+        <div class="absolute top-0 right-0 w-72 h-72 bg-accent-red/5 rounded-full blur-[100px] -mr-36 -mt-36 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-accent-gold/4 rounded-full blur-[80px] -ml-36 -mb-36 pointer-events-none"></div>
+
+        <div class="relative z-10 p-12 md:p-20 text-center">
+          <span class="text-accent-red text-xs font-bold tracking-[.3em] uppercase block mb-6">Premium Products + Expert Hands</span>
+          <h2 class="font-serif text-4xl md:text-5xl italic mb-6">Experience the <em class="text-accent-red not-italic">Difference</em></h2>
+          <p class="text-muted mb-10 max-w-lg mx-auto leading-relaxed">
+            Book a consultation today and let our specialists craft a personalised regimen using our world-class partner products.
+          </p>
+          <a href="appointments.html" class="inline-block bg-accent-red text-white px-14 py-4 font-bold text-xs tracking-widest uppercase hover:opacity-85 transition-all hover:scale-105 active:scale-95">
+            Book Now →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="bg-neutral-950 py-14 px-6 md:px-10 border-t border-white/5">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-screen-xl mx-auto">
+      <div>
+        <span class="font-serif text-xl text-neutral-100 block mb-3">Tk's <span class="text-accent-red">Makeover</span></span>
+        <p class="text-neutral-500 text-sm leading-relaxed">© 2025 Tk's Makeover.<br/>Crafted with ❤️ for bold looks.</p>
+      </div>
+      <div>
+        <h4 class="text-accent-red text-xs font-bold tracking-widest uppercase mb-5">Navigation</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="index.html"    class="text-neutral-500 hover:text-accent-pink transition-colors">Home</a></li>
+          <li><a href="services.html" class="text-neutral-500 hover:text-accent-pink transition-colors">Services</a></li>
+          <li><a href="gallery.html"  class="text-neutral-500 hover:text-accent-pink transition-colors">Gallery</a></li>
+          <li><a href="partners.html" class="text-accent-red underline">Partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-accent-red text-xs font-bold tracking-widest uppercase mb-5">Legal</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#" class="text-neutral-500 hover:text-accent-pink transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="text-neutral-500 hover:text-accent-pink transition-colors">Terms of Service</a></li>
+          <li><a href="#" class="text-neutral-500 hover:text-accent-pink transition-colors">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-accent-red text-xs font-bold tracking-widest uppercase mb-5">Follow</h4>
+        <div class="flex gap-4">
+          <a href="#" class="text-neutral-500 hover:text-accent-pink transition-colors"><span class="material-symbols-outlined text-xl">brand_awareness</span></a>
+          <a href="#" class="text-neutral-500 hover:text-accent-pink transition-colors"><span class="material-symbols-outlined text-xl">share</span></a>
+          <a href="#" class="text-neutral-500 hover:text-accent-pink transition-colors"><span class="material-symbols-outlined text-xl">mail</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

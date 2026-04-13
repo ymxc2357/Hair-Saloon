@@ -1,98 +1,373 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tk's Makeover | Premium Hair Salon</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tk's Makeover | The Noir Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-lowest": "#0e0e0e",
+          "on-primary-fixed-variant": "#920027",
+          "on-surface": "#e5e2e1",
+          "secondary-container": "#fecb00",
+          "surface-dim": "#131313",
+          "primary-container": "#ff5167",
+          "on-primary": "#680019",
+          "primary-fixed-dim": "#ffb3b5",
+          "primary": "#ffb3b5",
+          "tertiary": "#c6c6c7",
+          "surface-container-high": "#2a2a2a",
+          "surface-container-highest": "#353534",
+          "on-secondary": "#3d2f00",
+          "surface-container-low": "#1c1b1b",
+          "on-tertiary-container": "#282a2a",
+          "surface": "#131313",
+          "on-surface-variant": "#e6bcbd",
+          "surface-container": "#201f1f",
+          "secondary": "#ffecc0",
+          "on-secondary-container": "#6e5700",
+          "background": "#131313",
+          "outline-variant": "#5d3f40",
+          "on-primary-container": "#5b0015",
+        },
+        fontFamily: {
+          "headline": ["Noto Serif"],
+          "body": ["Inter"],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .hero-zoom { animation: zoom 20s infinite alternate ease-in-out; }
+  @keyframes zoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+  .marquee-track { display: flex; animation: marquee 30s linear infinite; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .grid-pattern {
+    background-image: radial-gradient(rgba(255,81,103,0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: flex; }
+  @keyframes pulse-red {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 0    rgba(255,81,103,0.5); }
+    70%  { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(255,81,103,0); }
+    100% { transform: scale(1);    box-shadow: 0 0 0 0    rgba(255,81,103,0); }
+  }
+  .animate-pulse-red { animation: pulse-red 2s infinite; }
+</style>
 </head>
-<body>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary">
 
-  <!-- NAVBAR -->
 <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
-    <div class="logo">Tk's <span>Makeover</span></div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="appointments.html" class="nav-cta">Book Now</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<header class="fixed top-0 w-full z-50 bg-neutral-900/60 backdrop-blur-xl shadow-2xl shadow-black/20" id="navbar">
+  <nav class="flex justify-between items-center px-6 md:px-8 py-4">
+    <a href="index.html" class="text-xl md:text-2xl font-serif tracking-tighter text-neutral-100">Tk's Makeover</a>
+    <div class="hidden md:flex items-center gap-8 lg:gap-10">
+      <a class="text-red-400 font-medium border-b border-red-400 pb-0.5 text-xs uppercase tracking-widest" href="index.html">Home</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all duration-300" href="services.html">Services</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all duration-300" href="gallery.html">Gallery</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all duration-300" href="partners.html">Partners</a>
+      <a class="text-neutral-400 hover:text-neutral-100 text-xs uppercase tracking-widest transition-all duration-300" href="contact.html">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="appointments.html" class="bg-primary-container text-on-primary-container px-5 py-2 text-xs font-bold uppercase tracking-widest hover:opacity-80 active:scale-95 transition-all duration-300">Book Now</a>
+      <button class="md:hidden flex flex-col justify-center gap-[5px] p-1" onclick="toggleMenu()">
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl1"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl2"></span>
+        <span class="block w-5 h-[2px] bg-neutral-100 transition-all duration-300" id="hl3"></span>
+      </button>
+    </div>
   </nav>
+  <div id="mobile-menu" class="flex-col items-center gap-5 py-8 bg-neutral-950/98 backdrop-blur-xl border-t border-white/5 text-center">
+    <a class="text-red-400 text-sm uppercase tracking-widest font-medium" href="index.html" onclick="toggleMenu()">Home</a>
+    <a class="text-neutral-400 hover:text-white text-sm uppercase tracking-widest" href="services.html" onclick="toggleMenu()">Services</a>
+    <a class="text-neutral-400 hover:text-white text-sm uppercase tracking-widest" href="gallery.html" onclick="toggleMenu()">Gallery</a>
+    <a class="text-neutral-400 hover:text-white text-sm uppercase tracking-widest" href="partners.html" onclick="toggleMenu()">Partners</a>
+    <a class="text-neutral-400 hover:text-white text-sm uppercase tracking-widest" href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="appointments.html" onclick="toggleMenu()" class="mt-2 inline-block bg-primary-container text-on-primary-container px-10 py-3 text-xs font-bold uppercase tracking-widest">Book Now</a>
+  </div>
+</header>
+
+<main>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="hero-badge">✦ Premium Hair Studio</div>
-      <h1>Your Hair.<br/><span class="highlight">Our Passion.</span></h1>
-      <p>Step into Tk's Makeover — where bold transformations and expert styling meet in perfect harmony.</p>
-      <div class="hero-buttons">
-        <a href="appointments.html" class="btn">Book Appointment</a>
-        <a href="services.html" class="btn btn-outline">View Services</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-number">500+</span>
-          <span class="stat-label">Happy Clients</span>
+  <section class="relative h-screen flex items-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="images/hero-bg.png" alt="Tk's Makeover salon interior" class="w-full h-full object-cover hero-zoom"/>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/20"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-primary-container/20 via-transparent to-transparent"></div>
+      <div class="absolute inset-0 grid-pattern opacity-30"></div>
+    </div>
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-8 md:px-12">
+      <div class="max-w-xl">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 bg-primary-container/20 backdrop-blur-md border border-primary-container/40 rounded-sm">
+          <span class="text-primary-fixed-dim text-xs font-bold tracking-[0.2em] uppercase">✦ Premium Hair Studio</span>
         </div>
-        <div class="stat">
-          <span class="stat-number">8+</span>
-          <span class="stat-label">Years Experience</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">15+</span>
-          <span class="stat-label">Services</span>
+        <h1 class="font-headline text-5xl md:text-7xl lg:text-8xl font-bold text-neutral-100 tracking-tighter leading-[1.05] mb-6">
+          Your Hair.<br/><span class="text-primary italic">Our Passion.</span>
+        </h1>
+        <p class="text-base md:text-lg text-neutral-400 max-w-md mb-10 leading-relaxed font-light">
+          Experience the ultimate in bespoke hair styling and editorial care. We don't just cut; we curate your visual identity with precision and soul.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="appointments.html" class="bg-primary-container text-on-primary-container px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 active:scale-95 transition-all duration-300">Book Your Session</a>
+          <a href="services.html" class="border border-neutral-500 text-neutral-300 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:border-primary-container hover:text-primary transition-all duration-300">View Services</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WHY CHOOSE US -->
-  <section class="features">
-    <span class="section-label">Why Us</span>
-    <h2 class="section-title">More Than Just a <span>Haircut</span></h2>
-    <div class="features-grid">
-      <div class="feature-card fade-in">
-        <span class="feature-icon">💇‍♀️</span>
-        <h3>Expert Stylists</h3>
-        <p>Years of professional experience and a passion for perfection in every single cut and style.</p>
+  <!-- STATS -->
+  <section class="py-16 bg-surface-container-low border-y border-white/5">
+    <div class="max-w-4xl mx-auto px-8 grid grid-cols-3 gap-8 text-center">
+      <div>
+        <div class="font-headline text-4xl md:text-5xl font-bold text-neutral-100" id="stat-clients">500+</div>
+        <div class="w-8 h-0.5 bg-primary-container mx-auto my-2"></div>
+        <div class="text-[10px] text-tertiary uppercase tracking-[0.2em]">Satisfied Clients</div>
       </div>
-      <div class="feature-card fade-in">
-        <span class="feature-icon">🌿</span>
-        <h3>Premium Products</h3>
-        <p>Only the finest, skin-friendly, salon-grade products touch your hair at Tk's Makeover.</p>
+      <div>
+        <div class="font-headline text-4xl md:text-5xl font-bold text-neutral-100" id="stat-years">8+</div>
+        <div class="w-8 h-0.5 bg-primary-container mx-auto my-2"></div>
+        <div class="text-[10px] text-tertiary uppercase tracking-[0.2em]">Years of Excellence</div>
       </div>
-      <div class="feature-card fade-in">
-        <span class="feature-icon">📅</span>
-        <h3>Easy Booking</h3>
-        <p>Book your slot online in under a minute — no calls, no waiting, no hassle.</p>
+      <div>
+        <div class="font-headline text-4xl md:text-5xl font-bold text-neutral-100" id="stat-services">15+</div>
+        <div class="w-8 h-0.5 bg-primary-container mx-auto my-2"></div>
+        <div class="text-[10px] text-tertiary uppercase tracking-[0.2em]">Specialized Services</div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Ready for Your <span style="color:var(--primary)">Transformation?</span></h2>
-    <p>Book your appointment today and let us handle the rest.</p>
-    <a href="appointments.html" class="btn">Book Now →</a>
+  <!-- WHY THE ATELIER -->
+  <section class="py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-12">
+        <h2 class="font-headline text-3xl md:text-4xl text-neutral-100 mb-3">Why the Atelier?</h2>
+        <div class="w-8 h-0.5 bg-primary-container"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-container p-8 rounded-sm border border-white/5 hover:border-primary-container/40 transition-all duration-500 fade-in">
+          <div class="text-primary-container text-2xl mb-5">✂</div>
+          <h3 class="font-headline text-xl text-neutral-100 mb-3">Expert Stylists</h3>
+          <p class="text-tertiary text-sm leading-relaxed font-light">Our team consists of editorial-grade professionals trained in the latest global hair couture techniques and trends.</p>
+        </div>
+        <div class="bg-surface-container p-8 rounded-sm border border-white/5 hover:border-primary-container/40 transition-all duration-500 fade-in">
+          <div class="text-primary-container text-2xl mb-5">✦</div>
+          <h3 class="font-headline text-xl text-neutral-100 mb-3">Premium Products</h3>
+          <p class="text-tertiary text-sm leading-relaxed font-light">We use only the finest apothecary and luxury brands, ensuring your hair receives the nutrition and shine it deserves.</p>
+        </div>
+        <div class="bg-surface-container p-8 rounded-sm border border-white/5 hover:border-primary-container/40 transition-all duration-500 fade-in">
+          <div class="text-primary-container text-2xl mb-5">♦</div>
+          <h3 class="font-headline text-xl text-neutral-100 mb-3">Luxury Experience</h3>
+          <p class="text-tertiary text-sm leading-relaxed font-light">Step into a sanctuary of style. Our atelier offers private consultations and a curated environment for your transformation.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Tk's Makeover. Crafted with ❤️ for bold looks.</p>
-  </footer>
+  <!-- MARQUEE -->
+  <section class="py-10 bg-surface-container-low overflow-hidden border-y border-white/5">
+    <div class="marquee-track items-center" style="gap:5rem; width: max-content;">
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">KÉRASTASE</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">REDKEN</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">DYSON</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">MOROCCANOIL</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">L'ORÉAL</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">WELLA</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">STREAX</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">MATRIX</span>
+      <!-- duplicate for seamless loop -->
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">KÉRASTASE</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">REDKEN</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">DYSON</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">MOROCCANOIL</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">L'ORÉAL</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">WELLA</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">STREAX</span>
+      <span class="text-xl font-bold text-neutral-600 tracking-[0.2em] uppercase whitespace-nowrap">MATRIX</span>
+    </div>
+  </section>
 
-  <script src="js/main.js"></script>
+  <!-- CLIENT CHRONICLES -->
+  <section class="py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-headline text-4xl text-neutral-100">Client Chronicles</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-container p-8 rounded-sm border border-white/5 fade-in">
+          <div class="flex text-secondary-container mb-5 gap-0.5">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+          </div>
+          <p class="text-on-surface italic mb-6 leading-relaxed text-sm">"The attention to detail at Tk's is unmatched. I came in for a simple cut and left feeling like I was ready for a Vogue cover."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center text-primary text-sm font-bold">P</div>
+            <div>
+              <div class="text-sm font-bold text-neutral-100">Priya Sharma</div>
+              <div class="text-xs text-tertiary">Fashion Blogger</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-surface-container p-8 rounded-sm border border-white/5 fade-in">
+          <div class="flex text-secondary-container mb-5 gap-0.5">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+          </div>
+          <p class="text-on-surface italic mb-6 leading-relaxed text-sm">"The best salon experience in the city. The colorists here are true artists who understand subtle tones and hair health."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center text-primary text-sm font-bold">R</div>
+            <div>
+              <div class="text-sm font-bold text-neutral-100">Rahul Desai</div>
+              <div class="text-xs text-tertiary">Entrepreneur</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-surface-container p-8 rounded-sm border border-white/5 fade-in">
+          <div class="flex text-secondary-container mb-5 gap-0.5">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+          </div>
+          <p class="text-on-surface italic mb-6 leading-relaxed text-sm">"Luxury redefined. From the warm welcome on arrival to the perfect finish, Tk's Makeover is my only choice."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center text-primary text-sm font-bold">A</div>
+            <div>
+              <div class="text-sm font-bold text-neutral-100">Ananya Patel</div>
+              <div class="text-xs text-tertiary">Makeup Artist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="py-20 px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative bg-gradient-to-r from-on-primary-fixed-variant to-primary-container p-12 md:p-20 rounded-sm overflow-hidden group">
+        <div class="absolute inset-0 grid-pattern opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+        <div class="relative z-10 text-center">
+          <h2 class="font-headline text-3xl md:text-5xl text-neutral-100 mb-10 leading-tight">
+            Ready for your <span class="italic">transformation?</span>
+          </h2>
+          <a href="appointments.html" class="inline-block bg-neutral-100 text-on-primary px-12 py-4 font-bold uppercase tracking-[0.25em] text-sm hover:scale-105 active:scale-95 transition-transform duration-300">
+            Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-neutral-950 w-full py-12 px-8">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+    <div class="col-span-1 md:col-span-2">
+      <div class="text-xl font-serif text-neutral-100 mb-4">Tk's Makeover</div>
+      <p class="text-neutral-500 max-w-md mb-6 text-sm leading-relaxed">The Noir Atelier. Crafting elegance through hair design since 2016. High-end editorial services for those who demand excellence.</p>
+      <div class="text-red-400 font-serif italic text-sm">© 2025 Tk's Makeover. The Noir Atelier.</div>
+    </div>
+    <div>
+      <h4 class="text-neutral-100 font-bold mb-6 tracking-widest text-xs uppercase">Quick Links</h4>
+      <ul class="space-y-3">
+        <li><a class="text-neutral-500 hover:text-red-300 transition-colors text-sm" href="services.html">Services</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 transition-colors text-sm" href="gallery.html">Gallery</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 transition-colors text-sm" href="partners.html">Partners</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 transition-colors text-sm" href="appointments.html">Book Now</a></li>
+        <li><a class="text-neutral-500 hover:text-red-300 transition-colors text-sm" href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-neutral-100 font-bold mb-6 tracking-widest text-xs uppercase">Contact</h4>
+      <ul class="space-y-3 text-neutral-500 text-sm">
+        <li class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-red-400 text-base mt-0.5">location_on</span>
+          <span>123 MG Road, Koregaon Park, Pune 411001</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-red-400 text-base">call</span>
+          <span>+91 98765 43210</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-red-400 text-base">schedule</span>
+          <span>Mon–Sat: 10am – 7pm</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919067034115?text=Hi!%20I%20would%20like%20to%20book%20an%20appointment."
+   target="_blank"
+   class="animate-pulse-red fixed bottom-8 right-8 z-[60] bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-2xl group">
+  <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-300" style="font-variation-settings:'FILL' 1">chat</span>
+</a>
+
+<script>
+// HAMBURGER
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const open = menu.classList.toggle('open');
+  document.getElementById('hl1').style.transform  = open ? 'translateY(7px) rotate(45deg)'   : '';
+  document.getElementById('hl2').style.opacity    = open ? '0' : '1';
+  document.getElementById('hl3').style.transform  = open ? 'translateY(-7px) rotate(-45deg)' : '';
+}
+
+// FADE IN ON SCROLL
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 130);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+// COUNTER ANIMATION
+function countUp(id, target, suffix) {
+  const el = document.getElementById(id);
+  let cur = 0;
+  const step = target / 60;
+  const t = setInterval(() => {
+    cur += step;
+    if (cur >= target) { cur = target; clearInterval(t); }
+    el.textContent = Math.floor(cur) + suffix;
+  }, 25);
+}
+const statsIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      countUp('stat-clients', 500, '+');
+      countUp('stat-years', 8, '+');
+      countUp('stat-services', 15, '+');
+      statsIO.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+statsIO.observe(document.getElementById('stat-clients'));
+</script>
 </body>
 </html>
-
-<!-- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6bmlrd2l0Z2JpcnZnZXdveHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NjQ1NTksImV4cCI6MjA5MTI0MDU1OX0.LOUMZXCjmUO-b7D5Sv6ytp2MOJXRFxkAuHVqH7g2wpw -->
- <!-- https://supabase.com/dashboard/project/jznikwitgbirvgewoxwq -->

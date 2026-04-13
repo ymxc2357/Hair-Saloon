@@ -948,3 +948,101 @@ h1, h2, h3 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ══════════════════════════════════════════
+   PARTNERS PAGE
+   ══════════════════════════════════════════ */
+
+.partners-intro {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 50px 24px 0;
+  text-align: center;
+  color: var(--gray);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.partners-section {
+  padding: 60px;
+  background: var(--dark2);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.brand-card {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  transition: var(--transition);
+}
+
+.brand-card:hover {
+  border-color: rgba(255,45,85,0.3);
+  transform: translateX(8px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.brand-logo {
+  min-width: 130px;
+  height: 80px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  padding: 10px;
+}
+
+.brand-info h3 {
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.brand-info p {
+  color: var(--gray);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.brand-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.brand-tag {
+  background: rgba(255,45,85,0.1);
+  border: 1px solid rgba(255,45,85,0.25);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .partners-section { padding: 40px 16px; }
+  .brand-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .brand-logo { width: 100%; min-width: unset; }
+}
+
